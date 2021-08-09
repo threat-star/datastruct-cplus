@@ -7,9 +7,15 @@
 using namespace std;
 
 //和字符串匹配一样，next数组 变为 failure pointer
+//AC自动机 就是在Trie的基础上。加入了类似于KMP的next数组，只不过此处的next数组在树上而已。
+
+//1. 将敏感词构建成 Trie 树 构建的复杂度为 O（m*len） m代表个数，len代表平均长度
+//2. 构建失败指针（k个节点，每个节点构建的时候 最多只会遍历 树的高度（及字符串的平均长度）len）的复杂度 O（k*len）
+//3. 构建策略就是最长可匹配的后缀，所以失败指针指向只能是上一层。 
 
 class AcNode
 {
+
 public:
 	AcNode() {};
 	AcNode(char data) :isEndingChar(false), m_data(data), length(-1)
@@ -17,9 +23,9 @@ public:
 	};
 	char m_data;
 	AcNode* children[26];
-	bool isEndingChar; //结尾字符
-	int length; //当isEndingChar = true，记录模式串的长度
-	AcNode* fail;
+	bool isEndingChar; 		//结尾字符
+	int length; 			//当isEndingChar = true，记录模式串的长度
+	AcNode* fail;           //失败指针，相当于next数组
 	
 };
 
@@ -54,6 +60,7 @@ void Ac::insert(string str)
 		if (str[i]<'a' || str[i]>'z')
 		{
 			cerr << "cin error" << endl;
+			return;
 		}
 
 		int index=str[i] - 'a';
@@ -78,6 +85,7 @@ void Ac::remove(string str)
 		if (str[i] < 'a' || str[i]>'z')
 		{
 			cerr << "cin error" << endl;
+			return;
 		}
 
 		int index = str[i] - 'a';
@@ -129,7 +137,7 @@ void Ac::buildFailurePointer()
 		AcNode* pc;
 		for (int i = 0; i < 26; ++i)
 		{
-			pc=p->children[i]; //循环遍历子孩子；
+			pc=p->children[i];          //循环遍历子孩子；
 			if (pc == NULL) continue;
 			if (p == root)
 			{
@@ -140,7 +148,7 @@ void Ac::buildFailurePointer()
 				AcNode* q = p->fail;
 				while (q != NULL)
 				{
-					AcNode* qc = q->children[pc->m_data - 'a'];
+					AcNode* qc = q->children[pc->m_data - 'a'];   //可匹配后缀
 					if (qc != NULL)
 					{
 						pc->fail = qc;
@@ -167,7 +175,7 @@ void Ac::match(string str)
 	for (int i=0;i<n;++i)   //时间复杂度为，O(length * n)  ,length为敏感词的长度;
 	{
 		int idx = str[i] - 'a';
-		while (p->children[idx] == NULL && p!=root) //没有匹配到，就找失败指针
+		while ( p->children[idx] == NULL && p != root) //没有匹配到，就找失败指针
 		{
 			p = p->fail;
 		}

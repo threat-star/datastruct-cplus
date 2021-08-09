@@ -23,7 +23,7 @@ public:
 		if ((tail + 1) % capacity == head) {
 			return false;
 		}
-		arr_[++(tail = (tail + 1) % capacity))] = rhs;
+		arr_[(tail = (tail + 1) % capacity))] = rhs;
 
 		cdvar_.notify_all();
 	}
