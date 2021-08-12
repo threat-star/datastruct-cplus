@@ -1,6 +1,8 @@
 {
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "condition_variable": "cpp",
+        "mutex": "cpp"
     }
 }

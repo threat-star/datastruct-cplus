@@ -1,1 +1,0 @@
-/usr/bin/c++   -Wall -std=c++11 -g   CMakeFiles/CIRQUEUE_TEST.dir/src/Queue_test.cc.o  -o ../bin/CIRQUEUE_TEST  -lgtest -lpthread 

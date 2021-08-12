@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include"../include/cirqueue.h"
 
 using namespace std;
 
@@ -35,14 +36,6 @@ using namespace std;
 
 int main( )
 {
-    int n;
-    cin>>n;
-    vector<int> vec(n);
-    for( int i=0; i < n; ++i )
-    {
-        cin >> vec[i];
-    }
-    
-    cout<<findMaxAverage(vec)<<endl;
+    queue_test();
     return 0;
 }

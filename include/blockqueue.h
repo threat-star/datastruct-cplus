@@ -7,24 +7,23 @@ using namespace std;
 template<typename T>
 class BlockingQueue{
 public:
-	BlockingQueue(int cap):mutex_(),cdvar_(),capactiy(cap),head(0),tail(0) {
+	BlockingQueue(int cap):mutex_(),cdvar_(),capactiy(cap),head(0),tail(-1),size_(0) {
 		arr_ = new T[cap];
 	}
 
-	bool empty() const{ 
-		lock_guard<mutex> lock(mutex_);
-		return head == tail;
-	}
+	
 
 	//push的时候 加入就好了
 	void push(const T& rhs) {
 		lock_guard<mutex> lock(mutex_);
 		//满了之后，业务应该有拒绝的措施
-		if ((tail + 1) % capacity == head) {
+		if ( Full() ) {
 			return false;
 		}
+		
+		size_++;
 		arr_[(tail = (tail + 1) % capacity))] = rhs;
-
+		
 		cdvar_.notify_all();
 	}
 
@@ -42,6 +41,7 @@ public:
 			//如果获取不到，那么就会卡在wait()这里等着，如果获取到了，wait()就继续执行上锁，如果wait()有第二个参数lambda表达式，如果表达式为
 
         head = (head + 1) % capacity;
+		--size_;
 	}
 
 	T front() const {
@@ -52,11 +52,23 @@ public:
 	int capacity() const{
 		return capacity;
 	}
+
+	bool empty() const{ 
+		lock_guard<mutex> lock(mutex_);
+		return head == tail;
+	}
+
+	bool Full()
+	{
+		lock_guard<mutex> lock(mutex_);
+		return size_ == capacity;
+	}
 private:
 	T* arr_;
 	int head;
 	int tail;
 	int capacity;
+	int size_;
 	mutex mutex_;
 	condition_variable cdvar_;
 };

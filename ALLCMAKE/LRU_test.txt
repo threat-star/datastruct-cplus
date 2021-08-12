@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.5)
+
+project( LRU_test )
+
+SET(CMAKE_BUILD_TYPE "Debug")   #设定编译类型
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+
+#SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -Wall")
+
+set( SOURCES ${PROJECT_SOURCE_DIR}/src )
+
+set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin )
+
+# add_compile_options()  添加参数
+# add_compile_options( -Wall -std=c+=11)
+
+## target_link_libraries()   相当于 g++ -l 参数 添加链接库
+
+## add_subdirectory () 可以编译多文件夹，要保证目录下有cmake文件
+
+add_executable( LRU_test ${SOURCES}/LRU_test.cc )
+
+target_include_directories( LRU_test PRIVATE ${PROJECT_SOURCE_DIR}/include )

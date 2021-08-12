@@ -1,3 +1,0 @@
-/mnt/d/WSL-ubuntu-shared/datastruct/build/CMakeFiles/rebuild_cache.dir
-/mnt/d/WSL-ubuntu-shared/datastruct/build/CMakeFiles/edit_cache.dir
-/mnt/d/WSL-ubuntu-shared/datastruct/build/CMakeFiles/CIRQUEUE_TEST.dir
