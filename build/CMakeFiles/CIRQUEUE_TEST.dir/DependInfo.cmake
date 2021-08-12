@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/mnt/d/WSL-ubuntu-shared/datastruct/src/LRU_test.cc" "/mnt/d/WSL-ubuntu-shared/datastruct/build/CMakeFiles/LRU_test.dir/src/LRU_test.cc.o"
+  "/mnt/d/WSL-ubuntu-shared/datastruct/src/Queue_test.cc" "/mnt/d/WSL-ubuntu-shared/datastruct/build/CMakeFiles/CIRQUEUE_TEST.dir/src/Queue_test.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

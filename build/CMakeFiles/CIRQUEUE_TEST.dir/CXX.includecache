@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/cirqueue.h
+iostream
+-
+mutex
+-
+condition_variable
+-
+pthread
+-
+gtest/gtest.h
+-
+
+/mnt/d/WSL-ubuntu-shared/datastruct/src/Queue_test.cc
+iostream
+-
+gtest/gtest.h
+-
+cirqueue.h
+/mnt/d/WSL-ubuntu-shared/datastruct/src/cirqueue.h
+

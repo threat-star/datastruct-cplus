@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named LRU_test
+# Target rules for targets named CIRQUEUE_TEST
 
 # Build rule for target.
-LRU_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 LRU_test
-.PHONY : LRU_test
+CIRQUEUE_TEST: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 CIRQUEUE_TEST
+.PHONY : CIRQUEUE_TEST
 
 # fast build rule for target.
-LRU_test/fast:
-	$(MAKE) -f CMakeFiles/LRU_test.dir/build.make CMakeFiles/LRU_test.dir/build
-.PHONY : LRU_test/fast
+CIRQUEUE_TEST/fast:
+	$(MAKE) -f CMakeFiles/CIRQUEUE_TEST.dir/build.make CMakeFiles/CIRQUEUE_TEST.dir/build
+.PHONY : CIRQUEUE_TEST/fast
 
-src/LRU_test.o: src/LRU_test.cc.o
+src/Queue_test.o: src/Queue_test.cc.o
 
-.PHONY : src/LRU_test.o
+.PHONY : src/Queue_test.o
 
 # target to build an object file
-src/LRU_test.cc.o:
-	$(MAKE) -f CMakeFiles/LRU_test.dir/build.make CMakeFiles/LRU_test.dir/src/LRU_test.cc.o
-.PHONY : src/LRU_test.cc.o
+src/Queue_test.cc.o:
+	$(MAKE) -f CMakeFiles/CIRQUEUE_TEST.dir/build.make CMakeFiles/CIRQUEUE_TEST.dir/src/Queue_test.cc.o
+.PHONY : src/Queue_test.cc.o
 
-src/LRU_test.i: src/LRU_test.cc.i
+src/Queue_test.i: src/Queue_test.cc.i
 
-.PHONY : src/LRU_test.i
+.PHONY : src/Queue_test.i
 
 # target to preprocess a source file
-src/LRU_test.cc.i:
-	$(MAKE) -f CMakeFiles/LRU_test.dir/build.make CMakeFiles/LRU_test.dir/src/LRU_test.cc.i
-.PHONY : src/LRU_test.cc.i
+src/Queue_test.cc.i:
+	$(MAKE) -f CMakeFiles/CIRQUEUE_TEST.dir/build.make CMakeFiles/CIRQUEUE_TEST.dir/src/Queue_test.cc.i
+.PHONY : src/Queue_test.cc.i
 
-src/LRU_test.s: src/LRU_test.cc.s
+src/Queue_test.s: src/Queue_test.cc.s
 
-.PHONY : src/LRU_test.s
+.PHONY : src/Queue_test.s
 
 # target to generate assembly for a file
-src/LRU_test.cc.s:
-	$(MAKE) -f CMakeFiles/LRU_test.dir/build.make CMakeFiles/LRU_test.dir/src/LRU_test.cc.s
-.PHONY : src/LRU_test.cc.s
+src/Queue_test.cc.s:
+	$(MAKE) -f CMakeFiles/CIRQUEUE_TEST.dir/build.make CMakeFiles/CIRQUEUE_TEST.dir/src/Queue_test.cc.s
+.PHONY : src/Queue_test.cc.s
 
 # Help Target
 help:
@@ -158,10 +158,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... LRU_test"
-	@echo "... src/LRU_test.o"
-	@echo "... src/LRU_test.i"
-	@echo "... src/LRU_test.s"
+	@echo "... CIRQUEUE_TEST"
+	@echo "... src/Queue_test.o"
+	@echo "... src/Queue_test.i"
+	@echo "... src/Queue_test.s"
 .PHONY : help
 
 
