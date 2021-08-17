@@ -4,6 +4,7 @@
 #include<iostream>
 #include<openssl/md5.h>
 #include<cstring>
+#include<stdlib.h>
 #include<map>
 
 #define LOG(fmt, para...) do{printf(fmt"\r", ##para);}while(0)
@@ -15,7 +16,7 @@ public:
     virtual long getHashValue(const std::string& str) = 0;
 };
 
-class MD5HashFunction
+class MD5HashFunction: public HashFunction
 {
 public:
     virtual long getHashValue(const std::string& str);
@@ -32,6 +33,9 @@ long MD5HashFunction::getHashValue(const std::string& str)
     MD5_Update(&md5, str.c_str(), strlen(str.c_str()));
     MD5_Final(hash, &md5);
 
+    
+    //每四个字节构成一个32位整数，将四个32位整数相加得到instr的hash值,最后结果大于32位，就变为了long
+    // 0xFF代表 一个16进制的数用4位就可以表示， 所以0xFF是 1111 1111
     for( int i=0; i<4; ++i)
     {
         hashValue +=
@@ -39,6 +43,7 @@ long MD5HashFunction::getHashValue(const std::string& str)
         ((long)(hash[i*4+2]&0xff) << 16) |
         ((long)(hash[i*4+1]&0xff) << 8)  |
         ((long)(hash[i*4+0]&0xff) << 0);
+        printf("hashValue is : %ld\n", hashValue);
     }
 
     return hashValue;
@@ -69,7 +74,7 @@ public:
     PhysicalNode* getFatherPhysicalNode();
     void setHash(long hash);
     long getHash();
-    void VirtualNode::setVirtualNode(PhysicalNode* father); 
+    void setVirtualNode(PhysicalNode* father); 
 private:
     PhysicalNode* m_father;
     unsigned long m_hashValue;    //节点的hash值
