@@ -11,8 +11,6 @@ public:
 		arr_ = new T[cap];
 	}
 
-	
-
 	//push的时候 加入就好了
 	void push(const T& rhs) {
 		lock_guard<mutex> lock(mutex_);
@@ -63,6 +61,7 @@ public:
 		lock_guard<mutex> lock(mutex_);
 		return size_ == capacity;
 	}
+	
 private:
 	T* arr_;
 	int head;
