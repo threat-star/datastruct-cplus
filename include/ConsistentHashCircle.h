@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<openssl/md5.h>
+#include"HashFunction.hpp"
 #include<cstring>
 #include<stdlib.h>
 #include<map>
@@ -10,44 +11,44 @@
 #define LOG(fmt, para...) do{printf(fmt"\r", ##para);}while(0)
 #define LOG_FUNC_TRACE() LOG("[Line:%d][Function:%s]\n", __LINE__, __FUNCTION__)
 
-class HashFunction
-{
-public:
-    virtual long getHashValue(const std::string& str) = 0;
-};
+// class HashFunction
+// {
+// public:
+//     virtual long getHashValue(const std::string& str) = 0;
+// };
 
-class MD5HashFunction: public HashFunction
-{
-public:
-    virtual long getHashValue(const std::string& str);
-};
+// class MD5HashFunction: public HashFunction
+// {
+// public:
+//     virtual long getHashValue(const std::string& str);
+// };
 
-long MD5HashFunction::getHashValue(const std::string& str)
-{
-    LOG_FUNC_TRACE();
-    long hashValue = 0;
-    unsigned char hash[16];
-    bzero(hash, sizeof(hash));
-    MD5_CTX md5;
-    MD5_Init(&md5);
-    MD5_Update(&md5, str.c_str(), strlen(str.c_str()));
-    MD5_Final(hash, &md5);
+// long MD5HashFunction::getHashValue(const std::string& str)
+// {
+//     LOG_FUNC_TRACE();
+//     long hashValue = 0;
+//     unsigned char hash[16];
+//     bzero(hash, sizeof(hash));
+//     MD5_CTX md5;
+//     MD5_Init(&md5);
+//     MD5_Update(&md5, str.c_str(), strlen(str.c_str()));
+//     MD5_Final(hash, &md5);
 
     
-    //每四个字节构成一个32位整数，将四个32位整数相加得到instr的hash值,最后结果大于32位，就变为了long
-    // 0xFF代表 一个16进制的数用4位就可以表示， 所以0xFF是 1111 1111
-    for( int i=0; i<4; ++i)
-    {
-        hashValue +=
-        ((long)(hash[i*4+3]&0xff) << 24) |
-        ((long)(hash[i*4+2]&0xff) << 16) |
-        ((long)(hash[i*4+1]&0xff) << 8)  |
-        ((long)(hash[i*4+0]&0xff) << 0);
-        printf("hashValue is : %ld\n", hashValue);
-    }
+//     //每四个字节构成一个32位整数，将四个32位整数相加得到instr的hash值,最后结果大于32位，就变为了long
+//     // 0xFF代表 一个16进制的数用4位就可以表示， 所以0xFF是 1111 1111
+//     for( int i=0; i<4; ++i)
+//     {
+//         hashValue +=
+//         ((long)(hash[i*4+3]&0xff) << 24) |
+//         ((long)(hash[i*4+2]&0xff) << 16) |
+//         ((long)(hash[i*4+1]&0xff) << 8)  |
+//         ((long)(hash[i*4+0]&0xff) << 0);
+//         printf("hashValue is : %ld\n", hashValue);
+//     }
 
-    return hashValue;
-}
+//     return hashValue;
+// }
 
 class PhysicalNode
 {
