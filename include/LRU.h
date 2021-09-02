@@ -10,9 +10,13 @@ using namespace std;
 class LRU
 {
 private:
+
+    using list_type = list<pair<int, int>>;
+    using cache_type = map<int, list<pair<int, int>>::iterator>;
+
     int m_cap;
-    list<pair<int, int>> list_;
-    map<int, list<pair<int, int>>::iterator> Cache;
+    list_type list_;
+    cache_type Cache;
 public:
 
     LRU( int capacity = 10 ): m_cap(capacity){}

@@ -95,16 +95,20 @@ void quickSort(vector<int>& vec,int s,int e) {
 	int end = e;
 	int tmp = vec[start];
 	while (start<end) {
-		while (start<end&&vec[end]>tmp) {
+		while (start < end && vec[end] > tmp) {
 			end--;
 		}
+		
 		if (start < end)
 			vec[start++] = vec[end];
+
 		while (start < end && vec[start] < tmp)
 			start++;
+
 		if (start < end)
 			vec[end--] = vec[start];
 	}
+	
 	vec[start] = tmp;
 	quickSort(vec, s, end-1);
 	quickSort(vec, start+1, e);
@@ -112,34 +116,37 @@ void quickSort(vector<int>& vec,int s,int e) {
 
 
 void AdjustDown(int* arr, int start, int end) {
+
 	int parent = start;
 	int child = 2 * parent + 1;
-	while (child<=end) {
+	while (child <= end) {
 		if (child + 1 <= end && arr[child + 1] > arr[child]) {
 			child++;
 		}
 
 		if (arr[parent] < arr[child]) {
 			swap(arr[parent], arr[child]);
-			parent = child;
+			parent = child; 
 			child = 2 * parent + 1;
-		}
-		else
-		{
+		} else {
 			break;
 		}
+
 	}
 }
 
 
 void heapSort(int* arr,int len) {
-	for (int i = len / 2 - 1;i>=0; i--) {
-		AdjustDown(arr,i,len-1);
+
+	for (int i = len / 2 - 1; i >= 0; i--) {
+		AdjustDown(arr, i, len-1);
 	}
-	for (int i = len - 1; i > 0;i--) {
+
+	for (int i = len - 1; i > 0; i--) {
 		swap(arr[0], arr[i]);
 		AdjustDown(arr, 0, i - 1);
 	}
+
 }
 
 void print(vector<int>vec) {

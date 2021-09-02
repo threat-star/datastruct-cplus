@@ -48,6 +48,8 @@ template<class K, class V>
 void HashMap<K,V>::push(const K& key,const V& value)
 {
     unsigned long hashKey = HashFunctionSingleton::getInstance()->getHashValue( std::to_string((size_t)&key) );
+    //可以加上rehash的逻辑。
+    
     if( m_arr[hashKey % m_capacity] == nullptr )
     {
         m_arr[hashKey % m_capacity] = new std::list< std::pair<K,V> >;

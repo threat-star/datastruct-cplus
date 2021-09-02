@@ -144,6 +144,7 @@ int ConsistentHashCircle::addVirtualNode(PhysicalNode* node)
         }
         else
         {
+            //处理哈希冲突的策略？
             LOG_FUNC_TRACE();
             std::cerr << "";
             return -1;
