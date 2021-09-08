@@ -1,4 +1,8 @@
-#pragma once
+// Copyright (c) 2022 by Sumra
+
+#ifndef _ACMATCH_H_
+#define _ACMATCH_H_
+
 #include<iostream>
 #include<vector>
 #include<queue>
@@ -196,3 +200,4 @@ void Ac::match(string str)
 	}
 }
 
+#endif

@@ -32,6 +32,7 @@ listNode* reverse(listNode* head)
 {
     if(!head || !head->next) return head;
     listNode* pre=nullptr,*next;
+
     while(head)
     {
         next=head->next;
@@ -61,16 +62,7 @@ listNode* listMerge(listNode* odd,listNode*even)
             even=even->next;
         }
     }
-    while(odd)
-    {
-        tmp->next=odd;
-        odd=odd->next;
-    }
-    while(even)
-    {
-        tmp->next=even;
-        even=even->next;
-    }
+    tmp->next = odd == nullptr ?  even : odd;
     
     return head->next;
 }
@@ -108,7 +100,47 @@ void listPrint(listNode* head)
 
 void Delete(listNode* head)
 {
+    Delete(head->next);
     delete head;
     head=nullptr;
-    Delete(head->next);
 }
+
+
+class Solution {
+public:
+    pair<listNode*, listNode*> my_reverse(listNode* head, listNode* tail) {
+        listNode* prev = tail->next;
+        listNode* p = head;
+        while (prev != tail) {
+            listNode* nex = p->next;
+            p->next = prev;
+            prev = p;
+            p = nex;
+        }
+        return {tail, head};
+    }
+
+    listNode* reverseKGroup(listNode* head, int k) {
+        listNode* hair = new listNode(0);
+        hair->next = head;
+        listNode* pre = hair;
+        while (head) {
+            listNode* tail = pre; 
+            for (int i = 0; i < k; ++i) {
+                tail = tail->next;
+                if (tail == nullptr) 
+                    return hair->next;
+            } 
+
+            listNode* next = tail->next;
+            pair<listNode*, listNode*> pairs = my_reverse(head, tail);
+            pre->next = pairs.first;
+            
+            pre = pairs.second;
+            head = next;
+        }
+        
+
+        return hair->next;
+    }
+};

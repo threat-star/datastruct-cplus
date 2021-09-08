@@ -1,3 +1,5 @@
+// Copyright (c) 2022 by Sumra
+
 #include <iostream>
 #include <vector>
 

@@ -4,6 +4,7 @@
 #include<iostream>
 #include<vector>
 #include<assert.h>
+#include<stack>
 
 using namespace std;
 
@@ -127,98 +128,96 @@ treeNode* getNext( treeNode* root )
     return root;
 }
 
+    // TreeNode* deleteNode(TreeNode* root, int key) 
+    // {
+    //     if (root == nullptr)    return nullptr;
+    //     if (key > root->val)    root->right = deleteNode(root->right, key);     // 去右子树删除
+    //     else if (key < root->val)    root->left = deleteNode(root->left, key);  // 去左子树删除
+    //     else    // 当前节点就是要删除的节点
+    //     {
+    //         if (! root->left)   return root->right; // 情况1，欲删除节点无左子
+    //         if (! root->right)  return root->left;  // 情况2，欲删除节点无右子
+    //         TreeNode* node = root->right;           // 情况3，欲删除节点左右子都有 
+    //         while (node->left)          // 寻找欲删除节点右子树的最左节点
+    //             node = node->left;
+    //         node->left = root->left;    // 将欲删除节点的左子树成为其右子树的最左节点的左子树
+    //         root = root->right;         // 欲删除节点的右子顶替其位置，节点被删除
+    //     }
+    //     return root;    
+    // }
+
 bool BinaryTree::removeNode( int val )
 {
     //情况1： 如果删除的是叶子节点，直接删
     //情况2： 如果删除的节点只有一个子树，直接替上去
     //情况3:  如果有两个children，则用右孩子的最左叶子节点代替。
-    assert( m_root );
-    treeNode* cur = m_root;
-    treeNode* parent = nullptr;
-    treeNode* delNode = cur;
+    if (m_root == nullptr) return false;
     
-    while( cur != nullptr && cur->m_val != val )
-    {
-        if( cur->m_val > val )
-        {
-            parent = cur;
-            cur = cur->left;
-        }
-        else
-        {
-            parent = cur;
-            cur = cur->right;
-        }
-    }
-
-    if( cur == nullptr )
-    {
-        return false;
-    }
-
-    delNode = cur;
-    if( !cur->left )  //只有右孩子
-    {
-        if( cur == m_root )
-        {
-            m_root = m_root->right; 
-        }
-        else if( cur == parent->left )
-        {
-            parent->left = cur->right;
-        }
-        else
-        {
-            parent->right = cur->right;
-        }
-    }   
-    else if( !cur->right )  //只有左孩子
-    {
-       if( cur == m_root )
-        {
-            m_root = m_root->left; 
-        }
-        else if( cur == parent->left )
-        {
-            parent->left = cur->left;
-        }
-        else
-        {
-            parent->right = cur->left;
-        }
-    }
-    else  //有两个children
-    {
-        treeNode* next = cur->right;
-        parent = cur;
-        while( next->left )
-        {
-            parent = next;
-            next = next->left;
-        }
-        cur->m_val = next->m_val;
-        delNode = next;
-        parent->left = next->right; //维护它的右节点。
-    }
-    
-    delete delNode;
-    delNode = nullptr;
-    return true;
 }
 
 vector<int> BinaryTree::preOrder()
 {
+    //前序
+    stack<treeNode*> stk;
+    stk.push(m_root);
+    while (!stk.empty()) {
+        auto& top = stk.top();
+        cout << top->m_val << " ";
+        stk.pop();
+        if (top->right) {
+            stk.push(top->right);
+        }
 
+        if (top->left) {
+            stk.push(top->left);
+        }
+    }
 }
 
 vector<int> BinaryTree::inOrder()
 {
-
+     //中序
+    stack<treeNode*> stk;
+    auto root = m_root;
+    while (!stk.empty() || root != nullptr) {
+       
+        if (root != nullptr) {
+            stk.push(root);
+            root = root->left;
+        } else {
+            root = stk.top();
+            cout << root->m_val << " ";
+            stk.pop();
+            root = root->right;
+        }
+    }
 }
 
 vector<int> BinaryTree::afterOrder()
 {
+    //h代表最近一次弹出的节点，c代表栈顶节点
+    if (m_root != nullptr) {
+        stack<treeNode*> stk;
+        stk.push(m_root);
+        treeNode* h = m_root;
 
+        while (!stk.empty()) {
+            auto c = stk.top();
+
+            //未打印过子节点, 先遍历
+            if (c->left != nullptr && h != c->left && h != c->right) { 
+                stk.push(c->left);
+            } else if (c->right != nullptr && h != c->right) {   //未打印过右子树
+                stk.push(c->right);
+            } else {
+                //auto top = stk.top();
+                cout << c->m_val << " ";
+                stk.pop();
+                
+                h = c;
+            }
+        }
+    }
 
 }
 

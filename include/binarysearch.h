@@ -81,12 +81,6 @@ int bsearch3(std::vector<int> arr, int n, int value) {
     return -1;
 }
 
-union is_big
-{
-    short s;
-    char c[2];
-};
-
 //变体四:查找最后-一个小于等于给定值的元素
 int bsearch3(std::vector<int> arr, int n, int value) {
     int low = 0;
