@@ -37,4 +37,5 @@ Singleton* Singleton::getInstance()
     return tmp;
 }
 
+
 #endif

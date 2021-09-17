@@ -1,3 +1,11 @@
+/*
+ * @Author: sumra
+ * @Date: 2021-09-07 16:38:16
+ * @LastEditTime: 2021-09-16 18:37:58
+ * @LastEditors: sumra
+ * @Description: implement ACmathch base on Trietree
+ * @FilePath: /datastruct/include/ACmatch.h
+ */
 // Copyright (c) 2022 by Sumra
 
 #ifndef _ACMATCH_H_

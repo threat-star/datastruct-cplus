@@ -1,3 +1,11 @@
+/*
+ * @Author: sumra
+ * @Date: 2021-09-16 21:36:18
+ * @LastEditTime: 2021-09-16 21:36:34
+ * @LastEditors: sumra
+ * @Description: In User Settings Edit
+ * @FilePath: /datastruct/include/mysort.h
+ */
 #pragma once
 
 #ifndef SORT_H

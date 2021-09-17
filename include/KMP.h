@@ -17,7 +17,7 @@ vector<int> get_next(string match) {
     vector<int> vec(match.length());
     vec[0] = -1;
     vec[1] = 0;
-    int pos = 2, cn = 0;
+    int pos = 2, cn = 0; //cn是跳到的位置
     while (pos < match.length()) {
         if (match[pos - 1] == match[cn]) {
             vec[pos++] = ++cn;

@@ -182,7 +182,7 @@ vector<int> BinaryTree::inOrder()
     while (!stk.empty() || root != nullptr) {
        
         if (root != nullptr) {
-            stk.push(root);
+            stk.push(root);  
             root = root->left;
         } else {
             root = stk.top();
@@ -220,6 +220,14 @@ vector<int> BinaryTree::afterOrder()
     }
 
 }
+
+// //利用层次遍历重建满二叉树;
+// treeNode* re_build_tree(vector<int> vec) {
+//     int n = vec.size();
+//     if (n == 0) {
+        
+//     }
+// }
 
 
 #endif
